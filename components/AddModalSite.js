@@ -17,22 +17,34 @@ import { useForm } from 'react-hook-form'
 import { useRef } from 'react'
 import { createSite } from '@/lib/db'
 import { useAuth } from '@/lib/auth'
+import { mutate } from 'swr'
 
-const AddModalSite = () => {
+const AddModalSite = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const finalRef = useRef()
+  const initialRef = useRef()
   const { handleSubmit, register, reset } = useForm()
   const toast = useToast()
   const { user } = useAuth()
 
   const onCreateSite = ({ site, url }) => {
-    createSite({
+    const newSite = {
       authorID: user.uid,
       createdAt: new Date().toISOString(),
       site,
       url
-    })
+    }
+
+    createSite(newSite)
+
+    mutate(
+      '/api/sites',
+      async data => {
+        return [...data, newSite]
+      },
+      false
+    )
     onClose()
+
     reset()
 
     toast({
@@ -46,10 +58,20 @@ const AddModalSite = () => {
 
   return (
     <>
-      <Button fontWeight="medium" onClick={onOpen} maxW="200px">
-        Add your first site
+      <Button
+        onClick={onOpen}
+        backgroundColor="gray.900"
+        color="white"
+        fontWeight="medium"
+        _hover={{ bg: 'gray.700' }}
+        _active={{
+          bg: 'gray.800',
+          transform: 'scale(0.95)'
+        }}
+      >
+        {children}
       </Button>
-      <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onCreateSite)}>
           <ModalHeader>Add Site</ModalHeader>
@@ -58,6 +80,7 @@ const AddModalSite = () => {
             <FormControl>
               <FormLabel>Name</FormLabel>
               <Input
+                ref={initialRef}
                 type="text"
                 placeholder="My site"
                 name="site"
