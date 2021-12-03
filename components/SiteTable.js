@@ -1,10 +1,9 @@
-import { Table, Thead, Tbody, Tr, Th, Td, Link } from '@chakra-ui/react'
-import { parseISO, format } from 'date-fns/fp'
+import { Link, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
 const SiteTable = ({ sites }) => {
   return (
     <Table variant="simple">
-      {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
       <Thead>
         <Tr>
           <Th>Name</Th>
@@ -20,9 +19,11 @@ const SiteTable = ({ sites }) => {
             <Td>{site.site}</Td>
             <Td>{site.url}</Td>
             <Td>
-              <Link>View FeedBack</Link>
+              <NextLink href="/p/[siteID]" as={`p/${site.id}`} passHref>
+                <Link>View FeedBack</Link>
+              </NextLink>
             </Td>
-            {/* <Td>{format(parseISO(site.createdAt, 'PPpp'))}</Td> */}
+            {/* <Td>{format(parseISO(site.createdAT), 'PPpp')}</Td> */}
             <Td>{site.createdAt}</Td>
           </Tr>
         ))}
