@@ -1,15 +1,10 @@
-import db from '@/lib/firebase-admin'
+import { getAllSites } from '@/lib/db-admin'
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (_, res) => {
-  const snapshot = await db.collection('sites').get()
-  const sities = []
-
-  snapshot.forEach(doc => {
-    sities.push({
-      id: doc.id,
-      ...doc.data()
-    })
-  })
-
-  res.status(200).json(sities)
+  const { sites, error } = await getAllSites()
+  
+  if (error) {
+    return res.status(500).json({ error })
+  }
+  res.status(200).json({ sites })
 }
