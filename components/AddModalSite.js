@@ -1,22 +1,15 @@
+import { useAuth } from '@/lib/auth'
+import { createSite } from '@/lib/db'
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
   FormControl,
   FormLabel,
-  Input,
-  useDisclosure,
+  Input, Modal, ModalBody,
+  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure,
   useToast
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
 import { useRef } from 'react'
-import { createSite } from '@/lib/db'
-import { useAuth } from '@/lib/auth'
+import { useForm } from 'react-hook-form'
 import { mutate } from 'swr'
 
 const AddModalSite = ({ children }) => {
@@ -39,7 +32,7 @@ const AddModalSite = ({ children }) => {
     mutate(
       '/api/sites',
       async data => {
-        return [...data, newSite]
+        return [...data.sites, newSite]
       },
       false
     )
