@@ -7,10 +7,9 @@ import fetcher from '@/utils/fetcher'
 import useSWR from 'swr'
 
 const Dashboard = () => {
-  const auth = useAuth()
-  const { data } = useSWR('/api/sites', fetcher)
+  const { user } = useAuth()
+  const { data } = useSWR(user ? ['/api/sites', user.token] : null, fetcher)
 
-  if (!auth.user) return 'Loading....'
   if (!data) {
     return (
       <DashboardShell>
