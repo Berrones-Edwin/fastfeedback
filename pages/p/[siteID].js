@@ -28,6 +28,7 @@ const FeedbackPage = ({ initialFeedBack }) => {
     setAllFeedBack([newFeedBack, ...allFeedBack])
 
     createFeedback(newFeedBack)
+    inputEl.current.value = ''
   }
   return (
     <Box
@@ -41,7 +42,7 @@ const FeedbackPage = ({ initialFeedBack }) => {
         <Box as="form" onSubmit={handleSubmit}>
           <FormControl my={8}>
             <FormLabel htmlFor="comment">Comment</FormLabel>
-            <Input ref={inputEl} id="comment" placeholder="Leave a comment" />
+            <Input autoComplete="off" ref={inputEl} id="comment" placeholder="Leave a comment" />
           </FormControl>
           <Button type="submit" mt={4}>
             Add Comment
@@ -50,8 +51,7 @@ const FeedbackPage = ({ initialFeedBack }) => {
       )}
       {allFeedBack.map(f => (
         <>
-      
-        <FeedBack key={f.id} {...f} />
+          <FeedBack key={f.id + '' + f.createdAt} {...f} />
         </>
       ))}
     </Box>
