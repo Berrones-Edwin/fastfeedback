@@ -1,6 +1,4 @@
-import React from 'react'
-import { theme as chakraTheme } from '@chakra-ui/react'
-
+import { theme as chakraTheme } from '@chakra-ui/react';
 const theme = {
   ...chakraTheme,
   fonts: {
@@ -23,7 +21,7 @@ const theme = {
       ),
       viewBox: '0 0 46 32'
     },
-    github: {
+    Github: {
       path: (
         <g
           fill="none"
@@ -60,6 +58,5 @@ const theme = {
       viewBox: '0 0 533.5 544.3'
     }
   }
-}
-
-export default theme
+};
+export default theme;
