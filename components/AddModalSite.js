@@ -4,8 +4,15 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input, Modal, ModalBody,
-  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
   useToast
 } from '@chakra-ui/react'
 import { useRef } from 'react'
@@ -27,13 +34,13 @@ const AddModalSite = ({ children }) => {
       url
     }
 
-    createSite(newSite)
+    const { id } = createSite(newSite)
 
     mutate(
       ['/api/sites', user.token],
-      async data => {
-        return [...data.sites, newSite]
-      },
+      async data => ({
+        sites: [...data.sites, { id, ...newSite }]
+      }),
       false
     )
     onClose()
