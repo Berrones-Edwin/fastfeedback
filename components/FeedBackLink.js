@@ -2,7 +2,7 @@ import { Flex, Link } from '@chakra-ui/react'
 const FeedBackLink = ({ siteID }) => {
   return (
     <Flex justifyContent="space-between" mb={8} width="full" mt={1}>
-      <Link fontSize="sm" href={`/p/${siteID}`}>
+      <Link fontSize="sm" href={`/site/${siteID}`}>
         Leave a comment{' '}
       </Link>
 

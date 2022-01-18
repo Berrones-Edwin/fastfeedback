@@ -19,7 +19,7 @@ const SiteTable = ({ sites }) => {
             <Td>{site.site}</Td>
             <Td>{site.url}</Td>
             <Td>
-              <NextLink href="/p/[siteID]" as={`p/${site.id}`} passHref>
+              <NextLink href="/site/[siteID]" as={`site/${site.id}`} passHref>
                 <Link color="blue.500" fontWeight={'medium'}>View FeedBack</Link>
               </NextLink>
             </Td>

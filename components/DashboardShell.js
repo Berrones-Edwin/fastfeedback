@@ -29,7 +29,7 @@ const DashboardShell = ({ children }) => {
                 <Icon name="logo" size="24px" mr={8} />
               </Link>
             </NextLink>
-            <NextLink href="/dashboard" passHref>
+            <NextLink href="/sites" passHref>
               <Link>Sites</Link>
             </NextLink>
             <NextLink href="/feedback" passHref>

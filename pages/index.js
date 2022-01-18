@@ -1,11 +1,12 @@
+import LoginButtons from '@/components/LoginButtons'
 import { useAuth } from '@/lib/auth'
-import { Box, Button, Flex, Link, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Link, Text } from '@chakra-ui/react'
 import Head from 'next/head'
 export default function Home() {
   const auth = useAuth()
   return (
     <>
-      <Box bg="gray.100">
+      <Box bg="gray.500">
         <Flex
           as="main"
           direction="column"
@@ -19,7 +20,7 @@ export default function Home() {
               dangerouslySetInnerHTML={{
                 __html: `
               if (document.cookie && document.cookie.includes('auth')) {
-                window.location.href = "/dashboard"
+                window.location.href = "/sites"
               }
             `
               }}
@@ -45,7 +46,7 @@ export default function Home() {
               <Text>Current user : {auth.user.name}</Text>
               <Button
                 as="a"
-                href="/dashboard"
+                href="/sites"
                 backgroundColor="white"
                 color="gray.900"
                 variant="outline"
@@ -63,41 +64,7 @@ export default function Home() {
               </Button>
             </>
           ) : (
-            <Stack>
-              <Button
-                onClick={e => auth.signInWithGithub()}
-                backgroundColor="gray.900"
-                color="white"
-                fontWeight="medium"
-                // leftIcon="github"
-                mt={4}
-                size="lg"
-                _hover={{ bg: 'gray.700' }}
-                _active={{
-                  bg: 'gray.800',
-                  transform: 'scale(0.95)'
-                }}
-              >
-                Sign In with GitHub
-              </Button>
-              <Button
-                onClick={e => auth.signInWithGoogle()}
-                backgroundColor="white"
-                color="gray.900"
-                variant="outline"
-                fontWeight="medium"
-                leftIcon="google"
-                mt={4}
-                size="lg"
-                _hover={{ bg: 'gray.100' }}
-                _active={{
-                  bg: 'gray.100',
-                  transform: 'scale(0.95)'
-                }}
-              >
-                Sign In with Google
-              </Button>
-            </Stack>
+            <LoginButtons />
           )}
         </Flex>
       </Box>
