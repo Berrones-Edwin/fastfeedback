@@ -1,20 +1,24 @@
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink, Flex, Heading
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Flex,
+  Heading
 } from '@chakra-ui/react'
-import React from 'react'
+import NextLink from 'next/link'
 
-const FeedBackTableHeader = () => {
+const FeedBackTableHeader = ({ siteName }) => {
   return (
     <>
       <Breadcrumb>
         <BreadcrumbItem>
-          <BreadcrumbLink>Feedback</BreadcrumbLink>
+          <NextLink href="/feedback" passHref>
+            <BreadcrumbLink>Feedback</BreadcrumbLink>
+          </NextLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Flex justifyContent="space-between">
-        <Heading mb={8}>My Feedback</Heading>
+        <Heading mb={8}>All Feedback</Heading>
       </Flex>
     </>
   )
