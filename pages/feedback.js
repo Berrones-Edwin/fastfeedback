@@ -1,5 +1,5 @@
 import DashboardShell from '@/components/DashboardShell'
-import EmptyState from '@/components/EmptyState'
+import FeedBackEmptyState from '@/components/FeedBackEmptyState'
 import FeedBackTable from '@/components/FeedBackTable'
 import FeedBackTableHeader from '@/components/FeedBackTableHeader'
 import SiteTableSkeleton from '@/components/SiteTableSkeleton'
@@ -10,6 +10,8 @@ import useSWR from 'swr'
 const Feedback = () => {
   const { user } = useAuth()
   const { data } = useSWR(user ? ['/api/feedback', user.token] : null, fetcher)
+
+  // console.log(data)
 
   if (!data) {
     return (
@@ -22,9 +24,11 @@ const Feedback = () => {
   return (
     <DashboardShell>
       <FeedBackTableHeader />
-      {data ? <FeedBackTable allFeedback={data.feedback} /> : <EmptyState />}
+      {data?.feedback?.length ? <FeedBackTable allFeedback={data.feedback} /> : <FeedBackEmptyState />}
     </DashboardShell>
   )
+
+   
 }
 
 export default Feedback
